@@ -6,12 +6,14 @@ from threading import Lock
 from concurrent.futures import ThreadPoolExecutor
 
 counterLock = Lock()
+page, counter = 1, 0 # constants, don't change
 
-low = ["low_suspiciousness_keywords"]
-mid = ["mid_suspiciousness_keywords"]
-high = ["high_suspiciousness_keywords"]
-page, counter = 1, 0
-category = 6 #for models, https://create.roblox.com/docs/projects/assets/api#query-parameters 
+low = [""] # if at least 5 keywords on here are detected, snipe
+mid = [""] # if at least 3 keywords on here are detected, sinipe
+high = [""] # if any keywords on here are detected, immeditely snipe
+category = 6 # assettypeid for models, for more check https://create.roblox.com/docs/projects/assets/api#query-parameters
+numOfThreads = 10 # adjust according to need, 10 is the recommended
+webhookUrl = "" # your webhook url that will have the sniped results sent to
 
 def heat(content, tier, strictness):
     count = 0
@@ -47,7 +49,7 @@ def scrape(threadCounter):
         if int(''.join(findall(r'\d', favoriteCount))) < 50:
             if heat(content, low, 5) or heat(content, mid, 3) or any(keyword in content for keyword in high):
                 print(f"Thread-{threadCounter} Sniped item {itemCounter} from Page {page}")
-                requests.post("[DISCORD_WEBHOOK]", json={"content": f"https://assetdelivery.roblox.com/v1/asset/?ID={assetID}"})
+                requests.post(webhookUrl, json={"content": f"https://assetdelivery.roblox.com/v1/asset/?ID={assetID}"})
         else:
             print(f"Thread-{threadCounter} Skipped item {itemCounter} from Page {page}")
     except Exception as e:
@@ -58,8 +60,8 @@ def processItem(threadCounter):
         scrape(threadCounter)
 
 def runloop():
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        for threadCounter in range(1, 10 + 1):
+    with ThreadPoolExecutor(max_workers=numOfThreads) as executor:
+        for threadCounter in range(1, numOfThreads + 1):
             executor.submit(processItem, threadCounter)
 
 if __name__ == "__main__":
