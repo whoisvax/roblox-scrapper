@@ -1,4 +1,4 @@
-# roblox Scrapper.
+# Roblox Scrapper.
 Searches the Roblox marketplace, parses the binary and looks for certain keywords inside.
 
 ## **Usage:**
