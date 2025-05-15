@@ -1,7 +1,10 @@
+> [!WARNING]
+> **Deprecated, way better options exist.**
+
 # Roblox Scrapper.
 Searches the Roblox marketplace, parses the binary and looks for certain keywords inside.
 
-## **Usage:**
+## **Methodology:**
 - __1. Searches the Roblox creator marketplace.__
 - __2. Filters Results.__
 - __3. Parses the binary blob of scraped objects for certain keywords.__
@@ -13,8 +16,8 @@ Searches the Roblox marketplace, parses the binary and looks for certain keyword
 - __The filtering is unoptimised.__
 - __It only searches within the UTF-8 text of the binary of an object (more convenient would be converting to XML (RBXLX or RBXMX)__
 
-## 👥 | Contact @xavsiohw on discord for inquiries
+## 👥 | Contact @phobiaphobiaphobia or @larpeiro on Discord for inquiries
 
-## ⭐ | Please support this project by giving it a star.
+## ⭐ | Please support me by giving it a star.
 
 ### [Check out other projects by me.](https://github.com/whoisvax/)
